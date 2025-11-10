@@ -2,8 +2,19 @@
 #include <random>
 #include <cmath>
 #include <iostream>
+#include <algorithm> // for std::shuffle, std::clamp
 #include <filesystem>
 #include "stb_image_write.h"
+
+#ifndef __cpp_lib_clamp
+namespace std {
+    template<class T>
+    const T& clamp(const T& v, const T& lo, const T& hi) {
+        return (v < lo) ? lo : (hi < v ? hi : v);
+    }
+}
+#endif
+
 
 namespace Noise {
 

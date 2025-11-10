@@ -2,6 +2,7 @@
 #include <random>
 #include <cmath>
 #include <iostream>
+#include <algorithm> // for std::shuffle, std::clamp
 #include <filesystem>
 //#define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"

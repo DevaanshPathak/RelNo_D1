@@ -1,4 +1,4 @@
-﻿﻿<h1 align="center">PackageNoise</h1>
+﻿﻿﻿<h1 align="center">PackageNoise</h1>
 
 <p align="center">
   <b>A modular C++ library for procedural noise generation</b><br/>
@@ -17,7 +17,7 @@
 ---
 
 <div align="center">
-  <img src="resources/noise_preview.png" width="420" alt="PackageNoise Example Preview"/><br/>
+  <img src="ImageOutput/simplexNoise.png" width="520" alt="PackageNoise Example Preview"/><br/>
   <strong>✨ Procedural noise generation made simple — one function call away.</strong>
 </div>
 
@@ -57,12 +57,27 @@ Designed to be modular, easy to include and extend. The library provides single-
 
 ### Build
 ```
-git clone <repo-url> PackageNoise
+git clone https://github.com/Adi5423/Package_Noise/ PackageNoise
 cd PackageNoise
+```
+
+```
 mkdir build && cd build
-cmake ..              # optionally: -DBUILD_EXAMPLES=OFF
-cmake --build . --config Release
-# If examples built, run:
+```
+
+If want to compile examples built, run:
+```
+cmake ..              
+cmake --build .
+```
+
+if already built once 
+```
+cmake ..
+cmake --build . --clean-first
+```
+
+```
 ./NoiseExample
 ```
 
@@ -299,9 +314,8 @@ Each map can be combined, remapped or visualized as textures, heightmaps, proced
 
 ## License
 
-This repository includes an `LICENSE` (MIT LICENSE for now). See `LICENSE.txt` for details.
+This repository includes an **MIT License**. See [`LICENSE.txt`](LICENSE.txt) for details..
 
-## MIT License (LICENSE.txt)
-
+Licensed under the **MIT License**. [`LICENSE.txt`](LICENSE.txt).
 
 ---
