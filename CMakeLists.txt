@@ -25,14 +25,16 @@ if (BUILD_EXAMPLES)
     target_compile_definitions(RelNoD_NoiseExample PRIVATE "RelNo_D1_EXAMPLE")
 endif()
 
-# Installation targets (install all libs and headers)
+# Installation setup — works on all platforms & paths
 install(TARGETS WhiteNoise PerlinNoise SimplexNoise
-        ARCHIVE DESTINATION lib
-        LIBRARY DESTINATION lib
-        RUNTIME DESTINATION bin)
+    EXPORT PackageNoiseTargets
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION bin
+)
 
+# Header installation
 install(DIRECTORY NoiseMaps/WhiteNoise/include/ DESTINATION include/Noise/WhiteNoise)
 install(DIRECTORY NoiseMaps/PerlinNoise/include/ DESTINATION include/Noise/PerlinNoise)
 install(DIRECTORY NoiseMaps/SimplexNoise/include/ DESTINATION include/Noise/SimplexNoise)
 install(FILES Noise.hpp DESTINATION include/Noise)
-

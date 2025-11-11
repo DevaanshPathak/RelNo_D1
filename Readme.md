@@ -1,4 +1,4 @@
-﻿﻿﻿<h1 align="center">RelNo_D1</h1>
+﻿﻿﻿`<h1 align="center">`RelNo_D1`</h1>`
 
 <p align="center">
   <b>A modular C++ library for procedural noise maps generation</b><br/>
@@ -11,6 +11,7 @@
   There will be 3 Dimensions of RelNo package, every Dimension will have a specific </br> set to focus as so <i><b>RelNo_D1 (1st Dimentsion)</i></b> stands for all the 2D Noise Maps</br>
   later versions will have more maps and functions.</br>
 </p>
+
 <p align="center">
   <i><b>Stay Attached for Updated Versions</i></b></br>
 </p>
@@ -49,8 +50,8 @@ Designed to be modular, easy to include and extend. The library provides single-
 - [Install / Build](#install--build)
 - [Quick example](#quick-example)
 - [API reference](#api-reference)
-- [Detailed function reference & calculations](#detailed-function-reference--calculations)
-- [Math & Implementation notes](#math--implementation-notes)
+- [Detailed function reference &amp; calculations](#detailed-function-reference--calculations)
+- [Math &amp; Implementation notes](#math--implementation-notes)
 - [Project layout](#project-layout)
 - [Contributing](#contributing)
 - [License](#license)
@@ -60,53 +61,57 @@ Designed to be modular, easy to include and extend. The library provides single-
 ## Install / Build
 
 ### Prerequisites
+
 - CMake (>= 3.10)
 - A C++17-capable compiler (MSVC, clang, gcc)
 - (Optional) Visual Studio or other IDE.
 
 ### Build
-```
+
+```bash
 git clone https://github.com/Adi5423/RelNo_D1/ RelNo_D1
 cd RelNo_D1
 ```
 
-```
+```bash
 mkdir build && cd build
 ```
 
 If want to compile examples built, run:
+
+```bash
+cmake ..            
 ```
-cmake ..              
-```
-```
+
+```bash
 cmake --build . --config Release
 ```
 
 If building first time, Skip this Step.
 if already built once and want to rebuild from scratch, run:
-```
+
+```bash
 cmake ..
 cmake --build . --clean-first
 ```
 
 Finally Run.
 
-```
+```bash
 RelNoD_NoiseExample.exe #or ./RelNoD_NoiseExample 
 ```
 
 ### Install (optional)
 
 ```bash
-cmake --install . --prefix /path/to/install
-#example: cmake --install . --prefix C:/RelNo_D1/allPackagesReady/install
+cmake --install build --prefix install 
+# run this from root directory(./RelNo_D1)
 ```
-
 
 This will place:
 
-* headers in `/path/to/install/include/Noise/...`
-* libs in `/path/to/install/lib`
+* headers in `/RelNo_D1/install/include/Noise/...`
+* libs in `/RelNo_D1/install/lib`
 
 ---
 
@@ -146,8 +151,8 @@ Each module exposes:
 * a generator function that returns `std::vector<std::vector<float>>` (height × width) with **values normalized to [0,1]**
 * a wrapper `create_*` function that handles saving or returning the map.
 
-| Function                                                                                                               | Description                          |
-| ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| Function                                                                                                                 | Description                          |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------ |
 | `create_whitenoise(width, height, seed, showMap, filename)`                                                            | Generates purely random white noise  |
 | `create_perlinnoise(width, height, scale, octaves, frequency, persistence, lacunarity, base, seed, showMap, filename)` | Generates multi-octave Perlin noise  |
 | `create_simplexnoise(width, height, scale, octaves, persistence, lacunarity, base, seed, showMap, filename)`           | Generates multi-octave Simplex noise |
@@ -173,12 +178,12 @@ std::vector<std::vector<float>> Noise::create_whitenoise(
 
 #### Parameters:
 
-| Name              | Type   | Description                                                                        |
-| ----------------- | ------ | ---------------------------------------------------------------------------------- |
-| `width`, `height` | int    | Resolution of the noise image                                                      |
-| `seed`            | int    | Random seed for reproducibility (if -1, random_device is used)                     |
-| `showMap`         | string | `"image"` saves PNG, `"none"` just returns the array, `"map"` prints ASCII preview |
-| `filename`        | string | Output PNG name (if saving)                                                        |
+| Name                  | Type   | Description                                                                              |
+| --------------------- | ------ | ---------------------------------------------------------------------------------------- |
+| `width`, `height` | int    | Resolution of the noise image                                                            |
+| `seed`              | int    | Random seed for reproducibility (if -1, random_device is used)                           |
+| `showMap`           | string | `"image"` saves PNG, `"none"` just returns the array, `"map"` prints ASCII preview |
+| `filename`          | string | Output PNG name (if saving)                                                              |
 
 #### Returns:
 
@@ -213,17 +218,17 @@ std::vector<std::vector<float>> Noise::create_perlinnoise(
 
 #### Parameters:
 
-| Name          | Type   | Description                                              |
-| ------------- | ------ | -------------------------------------------------------- |
+| Name            | Type   | Description                                               |
+| --------------- | ------ | --------------------------------------------------------- |
 | `scale`       | float  | Controls zoom — higher = smoother, lower = more detailed |
-| `octaves`     | int    | Number of layered frequencies (like harmonics)           |
-| `frequency`   | float  | Base frequency multiplier for coordinate scaling         |
+| `octaves`     | int    | Number of layered frequencies (like harmonics)            |
+| `frequency`   | float  | Base frequency multiplier for coordinate scaling          |
 | `persistence` | float  | Controls amplitude falloff between octaves (0–1)         |
-| `lacunarity`  | float  | Controls frequency growth per octave (usually 2.0)       |
-| `base`        | float  | Global offset to shift noise patterns                    |
-| `seed`        | int    | Random seed for permutation table                        |
-| `showMap`     | string | `"image"` or `"none"`                                    |
-| `filename`    | string | Output PNG filename                                      |
+| `lacunarity`  | float  | Controls frequency growth per octave (usually 2.0)        |
+| `base`        | float  | Global offset to shift noise patterns                     |
+| `seed`        | int    | Random seed for permutation table                         |
+| `showMap`     | string | `"image"` or `"none"`                                 |
+| `filename`    | string | Output PNG filename                                       |
 
 #### Returns:
 
@@ -272,15 +277,15 @@ std::vector<std::vector<float>> Noise::create_simplexnoise(
 
 #### Parameters:
 
-| Name                  | Type          | Description                              |
-| --------------------- | ------------- | ---------------------------------------- |
-| `scale`               | float         | Controls zoom (higher → larger patterns) |
-| `octaves`             | int           | Number of detail layers                  |
-| `persistence`         | float         | Amplitude decay per octave               |
-| `lacunarity`          | float         | Frequency growth per octave              |
-| `base`                | float         | Pattern offset                           |
-| `seed`                | int           | Seed for permutation table               |
-| `showMap`, `filename` | same as above |                                          |
+| Name                      | Type          | Description                               |
+| ------------------------- | ------------- | ----------------------------------------- |
+| `scale`                 | float         | Controls zoom (higher → larger patterns) |
+| `octaves`               | int           | Number of detail layers                   |
+| `persistence`           | float         | Amplitude decay per octave                |
+| `lacunarity`            | float         | Frequency growth per octave               |
+| `base`                  | float         | Pattern offset                            |
+| `seed`                  | int           | Seed for permutation table                |
+| `showMap`, `filename` | same as above |                                           |
 
 #### Returns:
 
