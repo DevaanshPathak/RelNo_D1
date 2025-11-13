@@ -1,5 +1,5 @@
-#include "PinkNoise.hpp"
 #include "Noise.hpp"
+#include "PinkNoise.hpp"
 #include "stb_image_write.h"
 
 #include <random>

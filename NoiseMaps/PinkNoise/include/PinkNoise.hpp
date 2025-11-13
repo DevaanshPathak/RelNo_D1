@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include "Noise.hpp" // for OutputMode (gives full enum definition)
 
 namespace Noise {
 
