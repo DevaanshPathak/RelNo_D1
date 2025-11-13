@@ -45,6 +45,14 @@ namespace Noise {
     // Returns normalized height value [0,1]
     float sample_terrain(float x, const TerrainParams& params);
 
+    // Chunk-based generation: Generate 1D terrain chunk
+    // Returns array of heights for a specific horizontal chunk
+    std::vector<float> generate_terrain_chunk(
+        int chunkX,           // Chunk X coordinate (horizontal position)
+        int chunkSize,        // Number of terrain samples per chunk
+        const TerrainParams& params
+    );
+
     // Generate 1D terrain profile (array of heights)
     // Useful for pre-generating or visualizing terrain sections
     std::vector<float> generate_terrain_profile(

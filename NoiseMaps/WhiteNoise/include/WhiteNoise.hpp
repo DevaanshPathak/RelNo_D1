@@ -38,6 +38,14 @@ namespace Noise {
         int seed = -1
     );
 
+    // Chunk-based generation: Generate noise for a specific chunk of the world
+    std::vector<std::vector<float>> generate_whitenoise_chunk(
+        int chunkX,           // Chunk X coordinate in world space
+        int chunkY,           // Chunk Y coordinate in world space
+        int chunkSize,        // Size of each chunk (width = height)
+        int seed = -1
+    );
+
     // Wrapper
     std::vector<std::vector<float>> create_whitenoise(
         int width = 256,

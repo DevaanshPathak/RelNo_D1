@@ -33,6 +33,11 @@ if (BUILD_EXAMPLES)
     add_executable(RelNoD_TerrainTest examples/test_terrain.cpp)
     target_link_libraries(RelNoD_TerrainTest PRIVATE TerrainNoise PerlinNoise)
     target_compile_definitions(RelNoD_TerrainTest PRIVATE "RelNo_D1_TERRAIN_TEST")
+    
+    # Chunk generation test
+    add_executable(RelNoD_ChunkTest examples/test_chunks.cpp)
+    target_link_libraries(RelNoD_ChunkTest PRIVATE WhiteNoise PerlinNoise SimplexNoise TerrainNoise)
+    target_compile_definitions(RelNoD_ChunkTest PRIVATE "RelNo_D1_CHUNK_TEST")
 endif()
 
 # Installation setup — works on all platforms & paths

@@ -32,6 +32,37 @@ namespace Noise {
     }
 
     // -------------------------------------------------------------
+    // Chunk-based generation: Generate a specific world chunk
+    // -------------------------------------------------------------
+    std::vector<std::vector<float>> generate_whitenoise_chunk(
+        int chunkX,
+        int chunkY,
+        int chunkSize,
+        int seed
+    ) {
+        if (chunkSize <= 0) {
+            throw std::invalid_argument("chunkSize must be > 0, got: " + std::to_string(chunkSize));
+        }
+
+        std::vector<std::vector<float>> chunk(chunkSize, std::vector<float>(chunkSize));
+
+        // Calculate world-space coordinates for this chunk
+        float worldOffsetX = chunkX * chunkSize;
+        float worldOffsetY = chunkY * chunkSize;
+
+        // Use hash-based sampling for deterministic chunk generation
+        for (int y = 0; y < chunkSize; ++y) {
+            for (int x = 0; x < chunkSize; ++x) {
+                float worldX = worldOffsetX + x;
+                float worldY = worldOffsetY + y;
+                chunk[y][x] = sample_whitenoise(worldX, worldY, seed);
+            }
+        }
+
+        return chunk;
+    }
+
+    // -------------------------------------------------------------
     // Generate white noise: returns a 2D vector of floats [0,1]
     // -------------------------------------------------------------
     std::vector<std::vector<float>> WhiteNoise::generate(int width, int height, int seed) {

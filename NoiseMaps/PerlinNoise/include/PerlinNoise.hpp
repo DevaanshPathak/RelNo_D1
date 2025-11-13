@@ -41,6 +41,21 @@ namespace Noise {
         int seed = -1
     );
 
+    // Chunk-based generation: Generate noise for a specific chunk of the world
+    // Enables efficient generation of large worlds by generating on-demand
+    std::vector<std::vector<float>> generate_perlin_chunk(
+        int chunkX,           // Chunk X coordinate in world space
+        int chunkY,           // Chunk Y coordinate in world space
+        int chunkSize,        // Size of each chunk (width = height)
+        float scale,
+        int octaves,
+        float frequency,
+        float persistence,
+        float lacunarity,
+        float base = 0.0f,
+        int seed = -1
+    );
+
     std::vector<std::vector<float>> generate_perlin_map(
         int width,
         int height,

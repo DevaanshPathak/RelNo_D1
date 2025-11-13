@@ -123,6 +123,37 @@ namespace Noise {
     }
 
     // ---------------------------------------------------------
+    // Chunk-based terrain generation
+    // ---------------------------------------------------------
+    std::vector<float> generate_terrain_chunk(
+        int chunkX,
+        int chunkSize,
+        const TerrainParams& params
+    ) {
+        if (chunkSize <= 0) {
+            throw std::invalid_argument("chunkSize must be > 0, got: " + std::to_string(chunkSize));
+        }
+
+        std::vector<float> chunk(chunkSize);
+
+        // Calculate world-space X offset for this chunk
+        float worldOffsetX = chunkX * chunkSize;
+
+        // Generate terrain heights for this chunk
+        for (int i = 0; i < chunkSize; ++i) {
+            float worldX = worldOffsetX + i;
+            chunk[i] = sample_terrain(worldX, params);
+        }
+
+        // Apply slope limiting if specified
+        if (params.maxSlope > 0.0f && params.maxSlope < 1.0f) {
+            chunk = apply_slope_limit(chunk, params.maxSlope);
+        }
+
+        return chunk;
+    }
+
+    // ---------------------------------------------------------
     // Generate 1D terrain profile
     // ---------------------------------------------------------
     std::vector<float> generate_terrain_profile(
