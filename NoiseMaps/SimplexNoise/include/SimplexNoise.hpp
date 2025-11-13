@@ -31,6 +31,31 @@ namespace Noise {
         float noise2D(float xin, float yin) const;
     };
 
+    // Single-value sampling API: Sample noise at specific coordinates without generating full map
+    float sample_simplex(
+        float x,
+        float y,
+        float scale,
+        int octaves,
+        float persistence,
+        float lacunarity,
+        float base = 0.0f,
+        int seed = -1
+    );
+
+    // Chunk-based generation: Generate noise for a specific chunk of the world
+    std::vector<std::vector<float>> generate_simplex_chunk(
+        int chunkX,           // Chunk X coordinate in world space
+        int chunkY,           // Chunk Y coordinate in world space
+        int chunkSize,        // Size of each chunk (width = height)
+        float scale,
+        int octaves,
+        float persistence,
+        float lacunarity,
+        float base = 0.0f,
+        int seed = -1
+    );
+
     // Generate multi-octave Simplex noise map
     std::vector<std::vector<float>> generate_simplex_map(
         int width,
@@ -49,7 +74,7 @@ namespace Noise {
         const std::string& filename = "simplex_noise.png",
         const std::string& outputDir = "");
 
-    // Entry wrapper – same structure as other noise types
+    // Entry wrapper ï¿½ same structure as other noise types
     std::vector<std::vector<float>> create_simplexnoise(
         int width,
         int height,

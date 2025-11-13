@@ -20,3 +20,8 @@ namespace Noise {
 #include "NoiseMaps/WhiteNoise/include/WhiteNoise.hpp"
 #include "NoiseMaps/PerlinNoise/include/PerlinNoise.hpp"
 #include "NoiseMaps/SimplexNoise/include/SimplexNoise.hpp"
+#include "NoiseMaps/TerrainNoise/include/TerrainNoise.hpp"
+#include "NoiseMaps/CaveNoise/include/CaveNoise.hpp"
+#include "NoiseMaps/TilemapExport/include/TilemapExport.hpp"
+#include "NoiseMaps/PostProcessing/include/PostProcessing.hpp"
+#include "NoiseMaps/DomainWarp/include/DomainWarp.hpp"

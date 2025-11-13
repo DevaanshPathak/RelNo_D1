@@ -27,6 +27,45 @@ target_include_directories(SimplexNoise PUBLIC
     ${CMAKE_SOURCE_DIR}/external
 )
 
+add_library(TerrainNoise STATIC
+    TerrainNoise/src/TerrainNoise.cpp
+)
+target_include_directories(TerrainNoise PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/TerrainNoise/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/PerlinNoise/include
+    ${CMAKE_SOURCE_DIR}/external
+)
+
+add_library(CaveNoise STATIC
+    CaveNoise/src/CaveNoise.cpp
+)
+target_include_directories(CaveNoise PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/CaveNoise/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/PerlinNoise/include
+    ${CMAKE_SOURCE_DIR}/external
+)
+
+add_library(TilemapExport STATIC
+    TilemapExport/src/TilemapExport.cpp
+)
+target_include_directories(TilemapExport PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/TilemapExport/include
+)
+
+add_library(PostProcessing STATIC
+    PostProcessing/src/PostProcessing.cpp
+)
+target_include_directories(PostProcessing PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/PostProcessing/include
+)
+
+add_library(DomainWarp STATIC
+    DomainWarp/src/DomainWarp.cpp
+)
+target_include_directories(DomainWarp PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/DomainWarp/include
+)
+
 # Shared stb implementation (compiled once)
 add_library(STBImageWrite OBJECT ${CMAKE_SOURCE_DIR}/external/stb_impl.cpp)
 
@@ -34,3 +73,5 @@ add_library(STBImageWrite OBJECT ${CMAKE_SOURCE_DIR}/external/stb_impl.cpp)
 target_link_libraries(WhiteNoise PRIVATE STBImageWrite)
 target_link_libraries(PerlinNoise PRIVATE STBImageWrite)
 target_link_libraries(SimplexNoise PRIVATE STBImageWrite)
+target_link_libraries(TerrainNoise PRIVATE STBImageWrite PerlinNoise)
+target_link_libraries(CaveNoise PRIVATE STBImageWrite PerlinNoise)

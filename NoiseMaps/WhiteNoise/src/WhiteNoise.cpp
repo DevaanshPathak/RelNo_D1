@@ -10,6 +10,59 @@
 namespace Noise {
 
     // -------------------------------------------------------------
+    // Single-value sampling: Hash-based white noise at specific coordinates
+    // -------------------------------------------------------------
+    float sample_whitenoise(float x, float y, int seed) {
+        // Use a simple hash function for deterministic random values
+        // This allows sampling white noise at any coordinate without storing the full map
+        int ix = static_cast<int>(std::floor(x));
+        int iy = static_cast<int>(std::floor(y));
+        
+        // Simple hash combining x, y, and seed
+        unsigned int hash = 2166136261u; // FNV offset basis
+        hash ^= static_cast<unsigned int>(ix);
+        hash *= 16777619u; // FNV prime
+        hash ^= static_cast<unsigned int>(iy);
+        hash *= 16777619u;
+        hash ^= static_cast<unsigned int>(seed >= 0 ? seed : 0);
+        hash *= 16777619u;
+        
+        // Convert hash to float [0,1]
+        return static_cast<float>(hash) / static_cast<float>(0xFFFFFFFFu);
+    }
+
+    // -------------------------------------------------------------
+    // Chunk-based generation: Generate a specific world chunk
+    // -------------------------------------------------------------
+    std::vector<std::vector<float>> generate_whitenoise_chunk(
+        int chunkX,
+        int chunkY,
+        int chunkSize,
+        int seed
+    ) {
+        if (chunkSize <= 0) {
+            throw std::invalid_argument("chunkSize must be > 0, got: " + std::to_string(chunkSize));
+        }
+
+        std::vector<std::vector<float>> chunk(chunkSize, std::vector<float>(chunkSize));
+
+        // Calculate world-space coordinates for this chunk
+        float worldOffsetX = chunkX * chunkSize;
+        float worldOffsetY = chunkY * chunkSize;
+
+        // Use hash-based sampling for deterministic chunk generation
+        for (int y = 0; y < chunkSize; ++y) {
+            for (int x = 0; x < chunkSize; ++x) {
+                float worldX = worldOffsetX + x;
+                float worldY = worldOffsetY + y;
+                chunk[y][x] = sample_whitenoise(worldX, worldY, seed);
+            }
+        }
+
+        return chunk;
+    }
+
+    // -------------------------------------------------------------
     // Generate white noise: returns a 2D vector of floats [0,1]
     // -------------------------------------------------------------
     std::vector<std::vector<float>> WhiteNoise::generate(int width, int height, int seed) {
