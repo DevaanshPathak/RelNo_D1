@@ -20,3 +20,4 @@ namespace Noise {
 #include "NoiseMaps/WhiteNoise/include/WhiteNoise.hpp"
 #include "NoiseMaps/PerlinNoise/include/PerlinNoise.hpp"
 #include "NoiseMaps/SimplexNoise/include/SimplexNoise.hpp"
+#include "NoiseMaps/PinkNoise/include/PinkNoise.hpp"

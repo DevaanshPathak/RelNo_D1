@@ -4,14 +4,40 @@ int main() {
     using namespace Noise;
 
     //White noise test image
-    create_whitenoise(256, 256, 21, OutputMode::Image, "whiteNoise.png");
+    create_whitenoise(
+		256, 256,   // width, height 
+		21,         // seed
+        OutputMode::Image, 
+        "whiteNoise.png"
+    );
 
     //Perlin noise test image 
     create_perlinnoise(512, 512, 50.0f, 6, 1.0f, 0.5f, 2.0f, 0.0f, 42, OutputMode::Image, "perlinNoise.png");
-    create_perlinnoise(512, 512, 75.0f, 3, 1.0f, 0.5f, 1.5f, 0.2f, 89, OutputMode::Image, "perlin_noise.jpg");
+    create_perlinnoise(
+		512, 512,   // width, height
+		75.0f,      // scale
+		3,          // octaves
+		1.0f,       // frequency
+		0.5f,       // persistence
+		1.5f,       // lacunarity
+		0.2f,       // base
+		89,         // seed
+        OutputMode::Image, 
+        "perlin_noise.jpg"
+    );
 
     //Simplex noise test image
     create_simplexnoise(512, 512, 60.0f, 4, 0.5f, 2.0f, 0.0f, 33, OutputMode::Image, "simplexNoise.png");
-    create_simplexnoise(512, 512, 60.0f, 2, 1.0f, 1.0f, 0.0f, 52, OutputMode::Image, "simplex_Noise.png");
+    create_simplexnoise(
+		512, 512,   // width, height 
+        60.0f,      // scale
+		2,          // octaves
+		1.0f,       // persistence
+		1.0f,       // lacunarity
+		0.0f,       // base
+		52,         // seed
+        OutputMode::Image, 
+        "simplex_Noise.png"
+    );
     return 0;
 }

@@ -21,12 +21,12 @@ add_subdirectory(NoiseMaps)
 # Example app (optional)
 if (BUILD_EXAMPLES)
     add_executable(RelNoD_NoiseExample examples/main.cpp)
-    target_link_libraries(RelNoD_NoiseExample PRIVATE WhiteNoise PerlinNoise SimplexNoise)
+    target_link_libraries(RelNoD_NoiseExample PRIVATE WhiteNoise PerlinNoise SimplexNoise PinkNoise)
     target_compile_definitions(RelNoD_NoiseExample PRIVATE "RelNo_D1_EXAMPLE")
 endif()
 
 # Installation setup — works on all platforms & paths
-install(TARGETS WhiteNoise PerlinNoise SimplexNoise
+install(TARGETS WhiteNoise PerlinNoise SimplexNoise PinkNoise
     EXPORT PackageNoiseTargets
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
@@ -37,4 +37,5 @@ install(TARGETS WhiteNoise PerlinNoise SimplexNoise
 install(DIRECTORY NoiseMaps/WhiteNoise/include/ DESTINATION include/Noise/WhiteNoise)
 install(DIRECTORY NoiseMaps/PerlinNoise/include/ DESTINATION include/Noise/PerlinNoise)
 install(DIRECTORY NoiseMaps/SimplexNoise/include/ DESTINATION include/Noise/SimplexNoise)
+install(DIRECTORY NoiseMaps/PinkNoise/include/ DESTINATION include/Noise/PinkNoise)
 install(FILES Noise.hpp DESTINATION include/Noise)
