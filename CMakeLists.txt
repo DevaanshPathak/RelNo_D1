@@ -53,10 +53,15 @@ if (BUILD_EXAMPLES)
     add_executable(RelNoD_PostProcessingTest examples/test_postprocessing.cpp)
     target_link_libraries(RelNoD_PostProcessingTest PRIVATE PostProcessing PerlinNoise)
     target_compile_definitions(RelNoD_PostProcessingTest PRIVATE "RelNo_D1_POSTPROCESSING_TEST")
+    
+    # Domain warp test
+    add_executable(RelNoD_DomainWarpTest examples/test_domainwarp.cpp)
+    target_link_libraries(RelNoD_DomainWarpTest PRIVATE DomainWarp PostProcessing PerlinNoise)
+    target_compile_definitions(RelNoD_DomainWarpTest PRIVATE "RelNo_D1_DOMAINWARP_TEST")
 endif()
 
 # Installation setup — works on all platforms & paths
-install(TARGETS WhiteNoise PerlinNoise SimplexNoise TerrainNoise CaveNoise TilemapExport PostProcessing
+install(TARGETS WhiteNoise PerlinNoise SimplexNoise TerrainNoise CaveNoise TilemapExport PostProcessing DomainWarp
     EXPORT PackageNoiseTargets
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
@@ -71,4 +76,5 @@ install(DIRECTORY NoiseMaps/TerrainNoise/include/ DESTINATION include/Noise/Terr
 install(DIRECTORY NoiseMaps/CaveNoise/include/ DESTINATION include/Noise/CaveNoise)
 install(DIRECTORY NoiseMaps/TilemapExport/include/ DESTINATION include/Noise/TilemapExport)
 install(DIRECTORY NoiseMaps/PostProcessing/include/ DESTINATION include/Noise/PostProcessing)
+install(DIRECTORY NoiseMaps/DomainWarp/include/ DESTINATION include/Noise/DomainWarp)
 install(FILES Noise.hpp DESTINATION include/Noise)

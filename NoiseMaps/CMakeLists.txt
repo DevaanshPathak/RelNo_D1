@@ -59,6 +59,13 @@ target_include_directories(PostProcessing PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/PostProcessing/include
 )
 
+add_library(DomainWarp STATIC
+    DomainWarp/src/DomainWarp.cpp
+)
+target_include_directories(DomainWarp PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/DomainWarp/include
+)
+
 # Shared stb implementation (compiled once)
 add_library(STBImageWrite OBJECT ${CMAKE_SOURCE_DIR}/external/stb_impl.cpp)
 
