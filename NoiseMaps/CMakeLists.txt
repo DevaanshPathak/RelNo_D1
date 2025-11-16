@@ -1,49 +1,70 @@
 # NoiseMaps/CMakeLists.txt
 # --------------------------------------------------
-# Builds the individual noise libraries
+# Builds each noise library with correct install/export support
 # --------------------------------------------------
 
-# White noise library
+# Shared stb implementation
+add_library(STBImageWrite OBJECT
+    ${CMAKE_CURRENT_SOURCE_DIR}/../external/stb_impl.cpp
+)
+
+# --------------------------------------------------
+# WhiteNoise
+# --------------------------------------------------
 add_library(WhiteNoise STATIC
     WhiteNoise/src/WhiteNoise.cpp
 )
+
 target_include_directories(WhiteNoise PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/WhiteNoise/include
-    ${CMAKE_SOURCE_DIR}/external
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/WhiteNoise/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external>
+    $<INSTALL_INTERFACE:include/Noise/WhiteNoise>
 )
 
-# Perlin noise library
+target_link_libraries(WhiteNoise PRIVATE STBImageWrite)
+
+# --------------------------------------------------
+# PerlinNoise
+# --------------------------------------------------
 add_library(PerlinNoise STATIC
     PerlinNoise/src/PerlinNoise.cpp
 )
+
 target_include_directories(PerlinNoise PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/PerlinNoise/include
-    ${CMAKE_SOURCE_DIR}/external
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/PerlinNoise/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external>
+    $<INSTALL_INTERFACE:include/Noise/PerlinNoise>
 )
 
-# Simplex noise library
+target_link_libraries(PerlinNoise PRIVATE STBImageWrite)
+
+# --------------------------------------------------
+# SimplexNoise
+# --------------------------------------------------
 add_library(SimplexNoise STATIC
     SimplexNoise/src/SimplexNoise.cpp
 )
+
 target_include_directories(SimplexNoise PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/SimplexNoise/include
-    ${CMAKE_SOURCE_DIR}/external
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/SimplexNoise/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external>
+    $<INSTALL_INTERFACE:include/Noise/SimplexNoise>
 )
 
-# Pink noise library
+target_link_libraries(SimplexNoise PRIVATE STBImageWrite)
+
+# --------------------------------------------------
+# PinkNoise
+# --------------------------------------------------
 add_library(PinkNoise STATIC
     PinkNoise/src/PinkNoise.cpp
 )
+
 target_include_directories(PinkNoise PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/PinkNoise/include
-    ${CMAKE_SOURCE_DIR}/external
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/PinkNoise/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external>
+    $<INSTALL_INTERFACE:include/Noise/PinkNoise>
 )
 
-# Shared stb implementation (compiled once)
-add_library(STBImageWrite OBJECT ${CMAKE_SOURCE_DIR}/external/stb_impl.cpp)
-
-# Link stb to each noise library
-target_link_libraries(WhiteNoise PRIVATE STBImageWrite)
-target_link_libraries(PerlinNoise PRIVATE STBImageWrite)
-target_link_libraries(SimplexNoise PRIVATE STBImageWrite)
 target_link_libraries(PinkNoise PRIVATE STBImageWrite)
+

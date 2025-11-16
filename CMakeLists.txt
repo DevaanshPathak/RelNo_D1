@@ -25,13 +25,19 @@ if (BUILD_EXAMPLES)
     target_compile_definitions(RelNoD_NoiseExample PRIVATE "RelNo_D1_EXAMPLE")
 endif()
 
-# Installation setup — works on all platforms & paths
-install(TARGETS WhiteNoise PerlinNoise SimplexNoise PinkNoise
-    EXPORT PackageNoiseTargets
+# Installation setup — works on all platforms & paths. Install the noise modules AND mark them for export
+install(TARGETS
+    STBImageWrite
+    WhiteNoise
+    PerlinNoise
+    SimplexNoise
+    PinkNoise
+    EXPORT RelNo_D1Targets
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
     RUNTIME DESTINATION bin
 )
+
 
 # Header installation
 install(DIRECTORY NoiseMaps/WhiteNoise/include/ DESTINATION include/Noise/WhiteNoise)
@@ -39,3 +45,27 @@ install(DIRECTORY NoiseMaps/PerlinNoise/include/ DESTINATION include/Noise/Perli
 install(DIRECTORY NoiseMaps/SimplexNoise/include/ DESTINATION include/Noise/SimplexNoise)
 install(DIRECTORY NoiseMaps/PinkNoise/include/ DESTINATION include/Noise/PinkNoise)
 install(FILES Noise.hpp DESTINATION include/Noise)
+
+
+# ----------------------------------------------------------
+# Export targets for find_package(RelNo_D1)
+# ----------------------------------------------------------
+
+install(EXPORT RelNo_D1Targets
+    FILE RelNo_D1Targets.cmake
+    NAMESPACE RelNo_D1::
+    DESTINATION lib/cmake/RelNo_D1
+)
+
+include(CMakePackageConfigHelpers)
+
+configure_package_config_file(
+    ${CMAKE_CURRENT_LIST_DIR}/cmake/RelNo_D1Config.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/RelNo_D1Config.cmake
+    INSTALL_DESTINATION lib/cmake/RelNo_D1
+)
+
+install(FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/RelNo_D1Config.cmake
+    DESTINATION lib/cmake/RelNo_D1
+)
