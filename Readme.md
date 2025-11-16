@@ -61,56 +61,60 @@ Designed to be modular, easy to include and extend. The library provides single-
 
 ### Prerequisites
 
-- CMake (>= 3.10)
-- A C++17-capable compiler (MSVC, clang, gcc)
-- (Optional) Visual Studio or other IDE.
+- **CMake** (>= 3.10)
+- **C++17-capable compiler** (MSVC 2017+, GCC, or Clang)
+- **(Optional)** Visual Studio IDE
 
-### Build
+### Quick Build (Windows PowerShell)
 
-```bash
-git clone https://github.com/Adi5423/RelNo_D1/ RelNo_D1
+```powershell
+# Clone the repository
+git clone https://github.com/DevaanshPathak/RelNo_D1.git
 cd RelNo_D1
+
+# Create and enter build directory
+mkdir build
+cd build
+
+# Configure and build
+cmake ..
+cmake --build . --config Release
+
+# Run the main example
+.\Release\RelNoD_NoiseExample.exe
 ```
 
-```bash
-mkdir build && cd build
+### Other Build Commands
+
+**Rebuild from scratch:**
+```powershell
+cmake --build . --config Release --clean-first
 ```
 
-If want to compile examples built, run:
-
-```bash
-cmake ..            
-```
-
-```bash
+**Build without examples:**
+```powershell
+cmake .. -DBUILD_EXAMPLES=OFF
 cmake --build . --config Release
 ```
 
-If building first time, Skip this Step.
-if already built once and want to rebuild from scratch, run:
-
-```bash
+**Build with Visual Studio IDE:**
+```powershell
 cmake ..
-cmake --build . --clean-first
+start RelNo_D1.sln  # Opens in Visual Studio
 ```
 
-Finally Run.
+📖 **For detailed build instructions, troubleshooting, and advanced options, see [BUILD.md](BUILD.md)**
 
-```bash
-RelNoD_NoiseExample.exe #or ./RelNoD_NoiseExample 
+### Install (Optional)
+
+```powershell
+# From the build directory
+cmake --install . --prefix ../install --config Release
 ```
 
-### Install (optional)
-
-```bash
-cmake --install build --prefix install 
-# run this from root directory(./RelNo_D1)
-```
-
-This will place:
-
-* headers in `/RelNo_D1/install/include/Noise/...`
-* libs in `/RelNo_D1/install/lib`
+This installs:
+- Headers in `install/include/Noise/`
+- Static libraries in `install/lib/`
 
 ---
 
