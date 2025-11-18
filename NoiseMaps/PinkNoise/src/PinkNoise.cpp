@@ -365,7 +365,11 @@ namespace Noise {
         for (int y = 0; y < height; ++y)
             for (int x = 0; x < width; ++x)
                 img[y * width + x] = static_cast<unsigned char>(std::clamp(noise[y][x], 0.0f, 1.0f) * 255.0f);
-        std::filesystem::path outDir = outputDir.empty() ? (std::filesystem::current_path().parent_path() / "ImageOutput") : outputDir;
+        std::filesystem::path outDir =
+    outputDir.empty()
+        ? (std::filesystem::current_path().parent_path() / "ImageOutput")
+        : std::filesystem::path(outputDir);
+
         std::filesystem::create_directories(outDir);
         std::filesystem::path file = outDir / filename;
         std::string ext = file.extension().string();
