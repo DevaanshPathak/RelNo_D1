@@ -69,3 +69,11 @@ install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/RelNo_D1Config.cmake
     DESTINATION lib/cmake/RelNo_D1
 )
+
+# ----------------------------------------------------------
+# Testing
+# ----------------------------------------------------------
+include(CTest)
+if (BUILD_TESTING AND BUILD_EXAMPLES)
+    add_test(NAME ExampleRuns COMMAND RelNoD_NoiseExample)
+endif()
